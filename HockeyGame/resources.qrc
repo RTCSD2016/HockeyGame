@@ -1,0 +1,8 @@
+<RCC>
+    <qresource prefix="/picture">
+        <file>table.png</file>
+        <file>ball.png</file>
+        <file>red.png</file>
+        <file>green.png</file>
+    </qresource>
+</RCC>

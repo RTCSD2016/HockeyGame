@@ -28,14 +28,18 @@ SOURCES += main.cpp\
     gameobject.cpp \
     guimanager.cpp \
     guimain.cpp \
-    gameobjects.cpp
+    gameobjects.cpp \
+    collision.cpp \
+    runthread.cpp
 
 HEADERS  += \
     render.h \
     gameobject.h \
     guimanager.h \
     guimain.h \
-    gameobjects.h
+    gameobjects.h \
+    collision.h \
+    runthread.h
 
 FORMS    +=
 
@@ -44,3 +48,5 @@ DISTFILES += \
 
 RESOURCES += \
     resources.qrc
+
+

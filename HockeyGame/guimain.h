@@ -9,6 +9,8 @@
 #include "render.h"
 #include "guimanager.h"
 #include "gameobjects.h"
+#include "collision.h"
+#include "runthread.h"
 
 namespace Hockey
 {
@@ -21,10 +23,13 @@ namespace Hockey
     public slots:
 
         void keyPressEvent(QKeyEvent *event);
+        //static DWORD WINAPI rThread(LPVOID pvoid);    //avaliable only on Windows
 
     private:
 
         Render render;
+        RunThread rThread;
+
     };
 }
 

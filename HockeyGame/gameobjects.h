@@ -15,8 +15,12 @@ namespace Hockey
         void Draw(QPainter* painter);
         void Update();
 
-        void Move_x(int step);
-        void Move_y(int step);
+        void Move_x(float step);
+        void Move_y(float step);
+
+        float getX();
+        float getY();
+        int getR();
 
         static RedRobot* GetInstance();
 
@@ -24,9 +28,9 @@ namespace Hockey
 
         QPen    edge;
         QBrush  texture;
-        int     radius;
-        int     pos_x;
-        int     pos_y;
+        int     diameter;
+        float     pos_x;
+        float     pos_y;
 
         static RedRobot* pInstance;
 
@@ -40,8 +44,12 @@ namespace Hockey
         void Draw(QPainter* painter);
         void Update();
 
-        void Move_x(int step);
-        void Move_y(int step);
+        void Move_x(float step);
+        void Move_y(float step);
+
+        float getX();
+        float getY();
+        int getR();
 
         static GreenRobot* GetInstance();
 
@@ -49,9 +57,9 @@ namespace Hockey
 
         QPen    edge;
         QBrush  texture;
-        int     radius;
-        int     pos_x;
-        int     pos_y;
+        int     diameter;
+        float     pos_x;
+        float     pos_y;
 
         static GreenRobot* pInstance;
     };
@@ -64,8 +72,16 @@ namespace Hockey
         void Draw(QPainter* painter);
         void Update();
 
-        void Move_x(int step);
-        void Move_y(int step);
+        void Move_x(float step);
+        void Move_y(float step);
+
+        float getX();
+        float getY();
+        int getR();
+
+        float getVelocity_x();
+        float getVelocity_y();
+        void setVelocity(float x, float y);
 
         static Ball* GetInstance();
 
@@ -73,9 +89,13 @@ namespace Hockey
 
         QPen    edge;
         QBrush  texture;
-        int     radius;
-        int     pos_x;
-        int     pos_y;
+        int     diameter;
+        float     pos_x;
+        float     pos_y;
+
+        //Velocity variable. Representing the pixels the ball moves through in 20 ms.
+        float     vx;
+        float     vy;
 
         static Ball* pInstance;
     };

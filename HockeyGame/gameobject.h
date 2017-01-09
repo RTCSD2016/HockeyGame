@@ -13,6 +13,7 @@ namespace Hockey
         virtual void Initialize() = 0;
         virtual void Draw(QPainter* painter) = 0;
         virtual void Update() = 0;
+
     };
 }
 

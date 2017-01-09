@@ -28,26 +28,44 @@ namespace Hockey
         QTimer* timer = new QTimer(this);
         connect(timer,SIGNAL(timeout()),guimanager,SLOT(Update()));
         timer->start(50);
+
+        rThread.start();
+
+        //HANDLE thread = CreateThread(NULL, 0, rThread, NULL, 0, NULL);    //Abandoned.
     }
 
     void GuiMain::keyPressEvent(QKeyEvent *event)
     {
         switch (event->key()) {
         case Qt::Key_W:
-            RedRobot::GetInstance()->Move_y(-5);
+            GreenRobot::GetInstance()->Move_y(-5);
             break;
         case Qt::Key_S:
-            RedRobot::GetInstance()->Move_y(5);
+            GreenRobot::GetInstance()->Move_y(5);
             break;
         case Qt::Key_A:
-            RedRobot::GetInstance()->Move_x(-5);
+            GreenRobot::GetInstance()->Move_x(-5);
             break;
         case Qt::Key_D:
-            RedRobot::GetInstance()->Move_x(5);
+            GreenRobot::GetInstance()->Move_x(5);
             break;
         default:
             break;
         }
     }
+    /*
+     *
+     * Abandoned Method
+     *
+     *
+    DWORD WINAPI GuiMain::rThread(LPVOID pvoid){
+        while(true){
+            Ball::GetInstance()->Move_x(Ball::GetInstance()->getVelocity_x());
+            Ball::GetInstance()->Move_y(Ball::GetInstance()->getVelocity_y());
+            Collision::getInstance()->checkCls();
+            Sleep(20);
+        }
+     }
+     */
 }
 

@@ -1,8 +1,8 @@
 <RCC>
     <qresource prefix="/picture">
-        <file>table.png</file>
-        <file>ball.png</file>
-        <file>red.png</file>
-        <file>green.png</file>
+        <file>resource/ball.png</file>
+        <file>resource/green.png</file>
+        <file>resource/red.png</file>
+        <file>resource/table.png</file>
     </qresource>
 </RCC>

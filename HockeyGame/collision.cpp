@@ -61,8 +61,8 @@ namespace Hockey
                        (RedRobot::GetInstance()->getX() + RedRobot::GetInstance()->getR() - ball->getX() - ball->getR()));     //Buggy!
 //            qDebug()<<alp;
             float vx_new = ball->getVelocity_x() * (pow(sin(alp), 2) - pow(cos(alp), 2)) + 2 * ball->getVelocity_y() * sin(alp) * cos (alp);
-            float vy_new = ball->getVelocity_y() * (pow(cos(alp), 2) - pow (sin(alp), 2)) -2 * ball->getVelocity_x() * sin(alp) * cos(alp);
-            qDebug()<<vy_new;
+            float vy_new = ball->getVelocity_y() * (pow(cos(alp), 2) - pow(sin(alp), 2)) -2 * ball->getVelocity_x() * sin(alp) * cos(alp);
+            //qDebug()<<vy_new;
             ball->setVelocity(vx_new, vy_new);
         }else{
             ball->setVelocity(ball->getVelocity_x(), -ball->getVelocity_y());
@@ -75,12 +75,13 @@ namespace Hockey
             alp = atan((ball->getY() + ball->getR() - RedRobot::GetInstance()->getY() - RedRobot::GetInstance()->getR()) /
                        (RedRobot::GetInstance()->getX() + RedRobot::GetInstance()->getR() - ball->getX() - ball->getR()));     //Buggy!
 //            qDebug()<<alp;
-            float vx_new = ball->getVelocity_x() * (pow(sin(alp), 2) - pow(cos(alp), 2)) + 2 * ball->getVelocity_y() * sin(alp) * cos (alp);
+            float vx_new = ball->getVelocity_x() * (pow(sin(alp), 2) - pow(cos(alp), 2)) + 2 * ball->getVelocity_y() * sin(alp) * cos(alp);
             float vy_new = ball->getVelocity_y() * (pow(cos(alp), 2) - pow (sin(alp), 2)) -2 * ball->getVelocity_x() * sin(alp) * cos(alp);
             qDebug()<<vy_new;
             ball->setVelocity(vx_new, vy_new);
         }else{
             ball->setVelocity(ball->getVelocity_x(), -ball->getVelocity_y());
         }
+
     }
 }

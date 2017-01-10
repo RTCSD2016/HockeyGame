@@ -6,13 +6,12 @@
 #include "gameobjects.h"
 
 namespace Hockey{
-    class Collision{
 
+    class Collision
+    {
     public:
 
         Collision();
-
-    public:
 
         int checkCls();
 

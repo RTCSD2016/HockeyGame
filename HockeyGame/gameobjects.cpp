@@ -15,14 +15,25 @@ namespace Hockey
 
     void RedRobot::Initialize()
     {
-        QPixmap pixmap(":/picture/red.png");
+        QPixmap pixmap(":/picture/resource/red.png");
         diameter = pixmap.height();
         pos_x = 150;
         pos_y = 60;
+        point = 0;
         pixmap.scaled(diameter,diameter,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
         texture.setTexture(pixmap);
         edge.setColor(QColor(255,0,255));
         edge.setWidth(1);
+
+        logic = new LogicManager();
+
+        velocity.vx = 0;
+        velocity.vy = 0;
+
+        connect(Messenger::GetInstance(),
+                   SIGNAL(sig_newMessageIn(int)),
+                   this,
+                   SLOT(Update(int)));
     }
 
     void RedRobot::Draw(QPainter *painter)
@@ -35,9 +46,50 @@ namespace Hockey
         painter->restore();
     }
 
-    void RedRobot::Update()
+    void RedRobot::Update(int messagetype)
     {
+        Message msg = Messenger::GetInstance()->ReceiveMessage(controler_need_red_robot_target);
 
+        if(msg.type==controler_need_red_robot_target)
+        {
+            logic->SetPosition(Ball::GetInstance()->getX(),Ball::GetInstance()->getY());
+            logic->SetVelocity(Ball::GetInstance()->getVelocity_x(),
+                               Ball::GetInstance()->getVelocity_y());
+            logic->Run();
+            Point target = logic->Gettarget();
+
+            Message targetMessage;
+
+            targetMessage.message = &target;
+            targetMessage.type = red_robot_set_target;
+
+            Messenger::GetInstance()->PostMessageWithoutInforming(targetMessage);
+        }
+        else
+        {
+            msg = Messenger::GetInstance()->ReceiveMessage(red_robot_get_velocity);
+
+            if(msg.type==red_robot_get_velocity)
+            {
+                Velocity* v = (Velocity*)msg.message;
+                velocity.vx = v->vx;
+                velocity.vy = v->vy;
+            }
+            else
+            {
+                Messenger::GetInstance()->PostMessageWithoutInforming(msg);
+            }
+        }
+    }
+
+    void RedRobot::Move_x()
+    {
+        pos_x+=velocity.vx;
+    }
+
+    void RedRobot::Move_y()
+    {
+        pos_y+=velocity.vy;
     }
 
     void RedRobot::Move_x(float step)
@@ -48,6 +100,16 @@ namespace Hockey
     void RedRobot::Move_y(float step)
     {
         pos_y+=step;
+    }
+
+    void RedRobot::SetPoint(int pt)
+    {
+       point = pt;
+    }
+
+    int RedRobot::GetPoint() const
+    {
+        return point;
     }
 
     float RedRobot::getX(){
@@ -75,14 +137,25 @@ namespace Hockey
 
     void GreenRobot::Initialize()
     {
-        QPixmap pixmap(":/picture/green.png");
+        QPixmap pixmap(":/picture/resource/green.png");
         diameter = pixmap.height();
         pos_x = 150;
         pos_y = 440;
+        point = 0;
         pixmap.scaled(diameter,diameter,Qt::IgnoreAspectRatio,Qt::SmoothTransformation);
         texture.setTexture(pixmap);
         edge.setColor(Qt::green);
         edge.setWidth(1);
+
+        logic = new LogicManager();
+
+        velocity.vx = 0;
+        velocity.vy = 0;
+
+        connect(Messenger::GetInstance(),
+                   SIGNAL(sig_newMessageIn(int)),
+                   this,
+                   SLOT(Update(int)));
     }
 
     void GreenRobot::Draw(QPainter *painter)
@@ -95,9 +168,50 @@ namespace Hockey
         painter->restore();
     }
 
-    void GreenRobot::Update()
+    void GreenRobot::Update(int messagetype)
     {
+        Message msg = Messenger::GetInstance()->ReceiveMessage(controler_need_green_robot_target);
 
+        if(msg.type==controler_need_green_robot_target)
+        {
+            logic->SetPosition(Ball::GetInstance()->getX(),Ball::GetInstance()->getY());
+            logic->SetVelocity(Ball::GetInstance()->getVelocity_x(),
+                               Ball::GetInstance()->getVelocity_y());
+            logic->Run();
+            Point target = logic->Gettarget();
+
+            Message targetMessage;
+
+            targetMessage.message = &target;
+            targetMessage.type = green_robot_set_target;
+
+            Messenger::GetInstance()->PostMessageWithoutInforming(targetMessage);
+        }
+        else
+        {
+            msg = Messenger::GetInstance()->ReceiveMessage(green_robot_get_velocity);
+
+            if(msg.type==green_robot_get_velocity)
+            {
+                Velocity* v = (Velocity*)msg.message;
+                velocity.vx = v->vx;
+                velocity.vy = v->vy;
+            }
+            else
+            {
+                Messenger::GetInstance()->PostMessageWithoutInforming(msg);
+            }
+        }
+    }
+
+    void GreenRobot::Move_x()
+    {
+        pos_x+=velocity.vx;
+    }
+
+    void GreenRobot::Move_y()
+    {
+        pos_y+=velocity.vy;
     }
 
     void GreenRobot::Move_x(float step)
@@ -108,6 +222,16 @@ namespace Hockey
     void GreenRobot::Move_y(float step)
     {
         pos_y+=step;
+    }
+
+    void GreenRobot::SetPoint(int pt)
+    {
+       point = pt;
+    }
+
+    int GreenRobot::GetPoint() const
+    {
+        return point;
     }
 
     float GreenRobot::getX(){
@@ -135,7 +259,7 @@ namespace Hockey
 
     void Ball::Initialize()
     {
-        QPixmap pixmap(":/picture/ball.png");
+        QPixmap pixmap(":/picture/resource/ball.png");
         diameter = pixmap.height();
         pos_x = 150;
         pos_y = 250;
@@ -158,7 +282,7 @@ namespace Hockey
         painter->restore();
     }
 
-    void Ball::Update()
+    void Ball::Update(int messagetype)
     {
 
     }
@@ -183,6 +307,12 @@ namespace Hockey
 
     int Ball::getR(){
         return diameter / 2;
+    }
+
+    void Ball::SetPosition(float x, float y)
+    {
+        pos_x = x;
+        pos_y = y;
     }
 
     float Ball::getVelocity_x(){
@@ -219,7 +349,7 @@ namespace Hockey
 
     }
 
-    void Arena::Update()
+    void Arena::Update(int messagetype)
     {
 
     }

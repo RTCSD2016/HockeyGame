@@ -30,7 +30,10 @@ SOURCES += main.cpp\
     guimain.cpp \
     gameobjects.cpp \
     collision.cpp \
-    runthread.cpp
+    runthread.cpp \
+    MotionControl.cpp \
+    messenger.cpp \
+    logicmanager.cpp
 
 HEADERS  += \
     render.h \
@@ -39,7 +42,11 @@ HEADERS  += \
     guimain.h \
     gameobjects.h \
     collision.h \
-    runthread.h
+    runthread.h \
+    MotionControl.h \
+    messenger.h \
+    logicmanager.h \
+    messagetypes.h
 
 FORMS    +=
 
@@ -48,5 +55,72 @@ DISTFILES += \
 
 RESOURCES += \
     resources.qrc
+
+INCLUDEPATH += /home/magicxu/xenomai/xenomai-2.6.5/include
+
+INCLUDEPATH += /home/magicxu/xenomai/xenomai-2.6.5/src/include
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lanalogy
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libanalogy.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lnative
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libnative.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lpsos
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libpsos.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lpthread_rt
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libpthread_rt.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lrtdm
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/librtdm.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -luitron
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libuitron.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lvrtx
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libvrtx.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lvxworks
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libvxworks.a
+
+unix:!macx: LIBS += -L$$PWD/../../../../usr/xenomai/lib/ -lxenomai
+
+INCLUDEPATH += $$PWD/../../../../usr/xenomai/include
+DEPENDPATH += $$PWD/../../../../usr/xenomai/include
+
+unix:!macx: PRE_TARGETDEPS += $$PWD/../../../../usr/xenomai/lib/libxenomai.a
 
 

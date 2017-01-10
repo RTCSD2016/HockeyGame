@@ -5,7 +5,7 @@ namespace Hockey
     GuiManager::GuiManager(Render *render, QWidget *parent)
         : QWidget(parent),pRender(render)
     {
-        QPixmap background(":/picture/table.png");
+        QPixmap background(":/picture/resource/table.png");
 
         setFixedSize(300,500);
         setAutoFillBackground(true);

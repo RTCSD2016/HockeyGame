@@ -7,7 +7,6 @@
 namespace Hockey
 {
 class RunThread : public QThread{
-
 public:
 
     RunThread();

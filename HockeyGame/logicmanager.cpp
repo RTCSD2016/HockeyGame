@@ -8,29 +8,40 @@ namespace Hockey
     float step_x;
     float step_y;
 
-    void LogicManager::SetVelocity(int v,int v_x,int v_y)
+    LogicManager::LogicManager()
     {
-        Velocity = v;
+
+    }
+
+    void LogicManager::SetVelocity(float v_x, float v_y)
+    {
         Velocity_x = v_x;
         Velocity_y = v_y;
     }
 
-    void LogicManager::SetPosition(int x,int y)
+    void LogicManager::SetPosition(float x,float y)
     {
         Ball_x = x;
         Ball_y = y;
 
     }
 
-    void LogicManager::GetTime()
+    void LogicManager::SetRobotPosition(float x, float y)
+    {
+        Robot_x = x;
+        Robot_y = y;
+    }
+
+    /*float LogicManager::GetTime()
     {
         float distance = sqrt((B_x-Ball_x)*(B_x-Ball_x)+(B_y-Ball_y)*(B_y-Ball_y));
         Time = distance/Velocity;
-    }
+        return Time;
+    }*/
 
     void LogicManager::TargetVector()
     {
-       int x = 90+rand()%120;                      //gate position_x
+       float x = 90+rand()%120;                      //gate position_x
        float k_v2 = B_y/(x-B_x) ;                   //Ball reflet direction
        float k_v1 = Velocity_y/Velocity_x;          //Ball direction
        float k = tan((atan(k_v2)+atan(k_v1))/2);    //Robot direction

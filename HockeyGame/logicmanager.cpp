@@ -30,7 +30,7 @@ namespace Hockey
 
     void LogicManager::TargetVector()
     {
-       int x = 100+rand()%100;                      //gate position_x
+       int x = 90+rand()%120;                      //gate position_x
        float k_v2 = B_y/(x-B_x) ;                   //Ball reflet direction
        float k_v1 = Velocity_y/Velocity_x;          //Ball direction
        float k = tan((atan(k_v2)+atan(k_v1))/2);    //Robot direction
